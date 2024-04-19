@@ -13,7 +13,7 @@ class Book
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -40,6 +40,15 @@ class Book
     #[ORM\Column(length: 255)]
     private ?string $state = null;
 
+    #[ORM\Column(type: "integer")]
+    private ?int $etat_id = null;
+
+    #[ORM\Column(type: "integer")]
+    private ?int $categorie_id = null;
+
+
+
+
     /**
      * @var Collection<int, EmpruntLivre>
      */
@@ -59,12 +68,19 @@ class Book
     #[ORM\ManyToOne(inversedBy: 'books')]
     private ?Categories $categorie = null;
 
+    /**
+     * @var Collection<int, Reservation>
+     * 
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="book")
+     */
+    private Collection $reservations;
+
     public function __construct()
     {
         $this->empruntLivres = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +181,29 @@ class Book
 
         return $this;
     }
+
+    public function getEtatId(): ?int
+{
+    return $this->etat_id;
+}
+
+public function setEtatId(?int $etat_id): self
+{
+    $this->etat_id = $etat_id;
+    return $this;
+}
+
+public function getCategorieId(): ?int
+{
+    return $this->categorie_id;
+}
+
+public function setCategorieId(?int $categorie_id): self
+{
+    $this->categorie_id = $categorie_id;
+    return $this;
+}
+   
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -269,4 +308,6 @@ class Book
 
         return $this;
     }
+
+    
 }
