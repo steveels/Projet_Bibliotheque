@@ -26,6 +26,8 @@ class Room
      * @var Collection<int, Reservation>
      */
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'room', orphanRemoval: true)]
+    #[ORM\OrderBy(['dateDebut' => 'ASC'])]
+
     private Collection $reservations;
 
     /**

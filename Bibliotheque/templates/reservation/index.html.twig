@@ -20,15 +20,12 @@
     locale: 'fr',
     timeZone:'Europe/Paris',
     slotMinTime: "08:00:00",
-    slotMaxTime: "19:00:00",
+    slotMaxTime: "20:00:00",
     weekends: false,
     slotDuration: '01:00:00',
     themeSystem: 'bootstrap5',
-    height: 400,
-    headerToolbar: {
-     
-      
-    },
+    height: 'auto',
+    
 
     events: {{ data|raw }},
 
@@ -61,9 +58,9 @@
   calendar.render();
    var eventForm = document.getElementById('event-form');
     var eventDataInput = document.getElementById('event-data');
-
     calendar.on('select', function(info) {
         
+  
         var alert = confirm('Etes-vous sûr de vouloir ajouter un événement à cette date?');
         if(alert){
 
@@ -73,11 +70,13 @@
                 
                 // Ajoutez d'autres propriétés si nécessaire
             };
-          
+  
+            
             eventDataInput.value = JSON.stringify(event);
             eventForm.submit();
            
         }
+    
     });
 
 
