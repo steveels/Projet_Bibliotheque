@@ -62,12 +62,7 @@ class UsersType extends AbstractType
                 'class' => 'btn btn-primary mt-4'
             ]
         ]);
-        // ->add('email')
-        // ->add('roles')
-        // ->add('password')
-        // ->add('birthdate', null, [
-        //     'widget' => 'single_text',
-        // ])
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void
