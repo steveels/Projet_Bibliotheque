@@ -1,26 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GestionSalleController!{% endblock %}
+{% block title %}Gestion des Salles{% endblock %}
 
 {% block body %}
-
-<div class="example-wrapper">
-
-    {% for room in rooms %}
-    <br>
-    {{ room.name }} 
-    capacité:
-    {{ room.capability }} personnes
-    Equipements:
-    {% for equip in room.equipement %}
-    
-    {{ equip.nom }}
-
-{% endfor %} 
-
-<a href="{{ path('app_reservation',{id:room.id})}}">Reservez</a>
-
-{% endfor %}
-
+<div class="container mt-3">
+    <h1 class="text-center mb-4">Nos Salles</h1>
+    <div class="row justify-content-center">
+        {% for room in rooms %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title">{{ room.name }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Capacité : {{ room.capability }} personnes</p>
+                    <p class="card-text">Équipements :</p>
+                    <ul class="list-unstyled">
+                        {% for equip in room.equipement %}
+                        <li>{{ equip.nom }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('app_reservation', {id: room.id}) }}" class="btn btn-primary btn-block">Réserver</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

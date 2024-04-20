@@ -17,12 +17,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservationController extends AbstractController
 {
     #[Route('/reservation/{id}', name: 'app_reservation', methods:['GET'])]
-    public function index($id,ReservationRepository $reservationRepository, Request $request, EntityManagerInterface $entityManager, RoomRepository $roomRepository): Response
+    public function index($id,ReservationRepository $reservationRepository, Request $request, EntityManagerInterface $entityManager, RoomRepository $roomRepository, UserInterface $user): Response
     {
         $events = $reservationRepository->findAll();
         $room = $roomRepository->find($id);
         $events = $reservationRepository->findBy(['room' => $room]); // Filtrer les réservations par salle
         $rdvs = [];
+      
         foreach($events as $event){
             $rdvs[] = [
                 'id' => $event->getId(),
