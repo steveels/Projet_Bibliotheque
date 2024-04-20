@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Détails du livre{{ book.title }}{% endblock %}
 
 {% block body %}
 <style>
@@ -8,8 +8,41 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<h1>{{ book.title }}</h1>
-<h2>{{ book.id }}</h2>
+<div class="example-wrapper">
+    <h1>{{ book.title }}</h1>
+    <img src="{{ book.image }}" alt="{{ book.title }}" class="book-image" />
+    <p>{{ book.resume }}</p>
+    <p>État du livre : 
+        {% if book.getEtatId() == 1 %}
+            Excellent
+        {% elseif book.getEtatId() == 2 %}
+            Correcte
+        {% elseif book.getEtatId() == 3 %}
+            Moyen
+       {% elseif book.getEtatId() == 4 %}
+            Mauvais
+        {% endif %}
+    </p>
+    <p>Catégorie du livre : 
+        {% if book.getCategorieId() == 1 %}
+            Policier
+        {% elseif book.getCategorieId() == 2 %}
+            Roman
+        {% elseif book.getCategorieId() == 3 %}
+            Littérature Française
+        {% elseif book.getCategorieId() == 4 %}
+            théâtre
+         {% elseif book.getCategorieId() == 5 %}
+            Nouvelle        
+         {% elseif book.getCategorieId() == 6 %}
+            Enfants
+
+        {% endif %}
+    </p>
+     <a href="{{ path('app_emprunt', {'id': book.id}) }}" class="btn btn-primary">Emprunter</a>
+</div>
+
+
 
 
 {% endblock %}

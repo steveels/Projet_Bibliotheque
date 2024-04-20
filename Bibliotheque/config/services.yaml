@@ -17,7 +17,7 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            # - '../src/Entity/'
             - '../src/Kernel.php'
 
 
@@ -27,3 +27,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+# Add an explicit definition for the Etat entity
+    # Replace 'YourBundle' with the actual namespace of your entity
+    App\Entity\Etat:
+        # Add any specific configuration for this service if needed

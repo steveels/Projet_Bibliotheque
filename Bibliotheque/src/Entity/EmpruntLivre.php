@@ -30,6 +30,11 @@ class EmpruntLivre
     #[ORM\ManyToOne(inversedBy: 'empruntLivres')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $user = null;
+ /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateRetour;
+
 
     public function getId(): ?int
     {
@@ -92,6 +97,18 @@ class EmpruntLivre
     public function setUser(?Users $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+    
+    public function getDateRetour(): ?\DateTimeInterface
+    {
+        return $this->dateRetour;
+    }
+
+    public function setDateRetour(\DateTimeInterface $dateRetour): self
+    {
+        $this->dateRetour = $dateRetour;
 
         return $this;
     }

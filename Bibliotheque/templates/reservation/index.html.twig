@@ -5,25 +5,84 @@
 {% block body %}
  <div id="calendrier">
  </div>
+ <form id="event-form" method="post" action="{{ path('save_event', {id:id}) }}">
+    <input type="hidden" id="event-data" name="event-data" value="">
+   
+</form>
+ 
 {% block javascripts %}
     <script>
-    window.onload = function() {
-        let calendarElt = document.getElementById('calendrier');
-        let calendar = new FullCalendar.Calendar(calendarElt, {
-             initialView: 'timeGridWeek',
-             locale: 'fr',
-             timeZone:'Europe,Paris',
-             headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+   document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendrier');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'timeGridWeek',
+    locale: 'fr',
+    timeZone:'Europe/Paris',
+    slotMinTime: "08:00:00",
+    slotMaxTime: "19:00:00",
+    weekends: false,
+    slotDuration: '01:00:00',
+    themeSystem: 'bootstrap5',
+    height: 400,
+    headerToolbar: {
+     
+      
+    },
+
+    events: {{ data|raw }},
+
+   
+
+    selectable: true,
+ 
+
+    
+    // select: function(arg) {
+    //    var alert = confirm('Etes-vous sûr de vouloir ajouter un événement à cette date?');
+    //    if(alert){
+    //         calendar.addEvent({
+    //             start: arg.start,
+    //             end: arg.end,
+    //             allDay: arg.allDay,
+    //             backgroundColor: arg.backgroundColor,
+    //             borderColor: arg.borderColor,
+    //             textColor: arg.textColor,
+    //         });
+    //    }else {
+    //    console.log('annulé')
+    //    }
+       
+        
+    // }
+ 
+  });
+
+  calendar.render();
+   var eventForm = document.getElementById('event-form');
+    var eventDataInput = document.getElementById('event-data');
+
+    calendar.on('select', function(info) {
+        
+        var alert = confirm('Etes-vous sûr de vouloir ajouter un événement à cette date?');
+        if(alert){
+
+            var event = {
+                start: info.start.toISOString(),
+                end: info.end.toISOString(),
                 
-             }
+                // Ajoutez d'autres propriétés si nécessaire
+            };
+          
+            eventDataInput.value = JSON.stringify(event);
+            eventForm.submit();
+           
+        }
+    });
 
 
-        });
-         calendar.render();
-    }
+  
+});
     
     </script>
     {% endblock %}

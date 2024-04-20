@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des livres</title>
+    <!-- Ajoutez ici vos liens CSS, scripts, etc. -->
+</head>
+<body>
+    <h1>Liste des livres</h1>
+    <ul>
+        {% for book in livres %}
+            <li>{{ book.title }}</li>
+            <img src="{{ book.image }}" alt="{{ book.title }}" class="book-image" />
+            <li>{{ book.author }}</li>
+            <a href="{{ path("details",{id:book.id}) }}">Voir plus</a> <!-- Utilisez book.id ici -->
+        {% endfor %}
+    </ul>
+   
+</body>
+</html>

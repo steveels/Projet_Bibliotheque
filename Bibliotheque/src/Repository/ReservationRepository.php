@@ -20,7 +20,29 @@ class ReservationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Reservation::class);
     }
-
+    public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
+    {
+        $qb = $this->createQueryBuilder('r');
+    
+        if (isset($criteria['room'])) {
+            $qb->andWhere('r.room = :room')
+               ->setParameter('room', $criteria['room']);
+        }
+    
+        if ($orderBy) {
+            $qb->orderBy(...$orderBy);
+        }
+    
+        if ($limit !== null) {
+            $qb->setMaxResults($limit);
+        }
+    
+        if ($offset !== null) {
+            $qb->setFirstResult($offset);
+        }
+    
+        return $qb->getQuery()->getResult();
+    }
     //    /**
     //     * @return Reservation[] Returns an array of Reservation objects
     //     */
