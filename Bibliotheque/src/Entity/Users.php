@@ -77,6 +77,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'comUser')]
     private Collection $commentaires;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $banni = null;
+
     #[ORM\EntityListeners(['App\EntityListener\UsersListener'])]
 
     public function __construct()
@@ -343,6 +346,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $commentaire->setComUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isBanni(): ?bool
+    {
+        return $this->banni;
+    }
+
+    public function setBanni(?bool $banni): static
+    {
+        $this->banni = $banni;
 
         return $this;
     }
