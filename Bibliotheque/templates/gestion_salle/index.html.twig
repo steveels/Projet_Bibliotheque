@@ -20,10 +20,19 @@
                         <li>{{ equip.nom }}</li>
                         {% endfor %}
                     </ul>
-                </div>
+                </div>{% if is_granted('ROLE_USER')  %}
                 <div class="card-footer">
                     <a href="{{ path('app_reservation', {id: room.id}) }}" class="btn btn-primary btn-block">Réserver</a>
+                    
+                </div>{% else %}
+                  <div class="card-footer text-center">
+                  <p class='alert-danger'>Veuillez vous inscrires ou vous connectez.</p>
+                    <a href="{{ path('app_login') }}" class="btn btn-primary btn-block">Cliquez ici</a>
+                    
                 </div>
+                
+
+                {% endif %}
             </div>
         </div>
         {% endfor %}
