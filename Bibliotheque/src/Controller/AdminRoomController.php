@@ -10,12 +10,16 @@ use App\Repository\ReservationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/room')]
+ 
 class AdminRoomController extends AbstractController
 {
+    
     #[Route('/', name: 'app_admin_room_index', methods: ['GET'])]
+   #[IsGranted('ROLE_ADMIN')]
     public function index(RoomRepository $roomRepository, ReservationRepository $res): Response
     {
         $rooms = $roomRepository->findAll();
