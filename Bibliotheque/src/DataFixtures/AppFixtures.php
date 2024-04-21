@@ -1,38 +1,68 @@
 <?php
 
+// src/DataFixtures/AppFixtures.php
 namespace App\DataFixtures;
 
-use App\Entity\Users;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
-use Faker\Factory; 
+use DateTime;
+use Faker\Factory;
 use Faker\Generator;
+use App\Entity\Users;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
     private Generator $faker;
+    private UserPasswordHasherInterface $passwordHasher;
 
-    public function __construct()
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->faker = Factory::create('fr_FR');
+        $this->passwordHasher = $passwordHasher;
     }
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i <= 10; $i++) {
+        // Création d'un utilisateur admin
+        $admin = new Users();
+        $admin->setFirstname('Administrateur de la bibliothèque')
+            ->setLastname('peter')
+            ->setEmail('admin@bibliotheque.fr')
+            ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
+            ->setBirthdate(DateTime::createFromFormat('d/m/Y', '09/09/2000'))
+            ->setAdress('zertfgyuhj')
+            ->setCity('zertfgyuhj')
+            ->setZipCode('3456789')
+            ->setPhoneNumber('234567890');
+
+        // Hachage du mot de passe
+        $hashedPassword = $this->passwordHasher->hashPassword($admin, 'password');
+        $admin->setPassword($hashedPassword);
+
+        // Persister l'admin
+        $manager->persist($admin);
+
+        // Création d'autres utilisateurs
+        for ($i = 0; $i < 10; $i++) {
             $user = new Users();
             $user->setFirstname($this->faker->name())
                 ->setLastname($this->faker->name())
                 ->setEmail($this->faker->email())
-                ->setBirthdate($this->faker->dateTime()) 
-                ->setAdress($this->faker->sentence()) 
-                ->setCity($this->faker->sentence()) 
-                ->setZipCode($this->faker->randomNumber()) 
-                ->setPhoneNumber($this->faker->randomNumber())
-                ->setPassword('password'); 
-                
+                ->setBirthdate($this->faker->dateTime())
+                ->setAdress($this->faker->sentence())
+                ->setCity($this->faker->sentence())
+                ->setZipCode($this->faker->randomNumber())
+                ->setPhoneNumber($this->faker->randomNumber());
+
+            // Hachage du mot de passe
+            $hashedPassword = $this->passwordHasher->hashPassword($user, 'password');
+            $user->setPassword($hashedPassword);
+
+            // Persister l'utilisateur
             $manager->persist($user);
         }
-
-}
+        // Enregistrer les modifications dans la base de données
+        $manager->flush();
+    }
 }

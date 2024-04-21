@@ -86,12 +86,7 @@ class UsersType extends AbstractType
             ],
             'label' => 'Mot de passe'
         ]);
-        // ->add('email')
-        // ->add('roles')
-        // ->add('password')
-        // ->add('birthdate', null, [
-        //     'widget' => 'single_text',
-        // ])
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -28,7 +28,11 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?Room $room = null;
 
-   
+    public function __toString()
+    {
+        return 'Reservation #' . $this->id;
+    }
+
 
     public function getId(): ?int
     {
