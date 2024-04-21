@@ -6,14 +6,14 @@ use App\Entity\Users;
 use App\Form\UsersType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request; // Correction de l'import
+use Symfony\Component\HttpFoundation\Request; 
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UsersController extends AbstractController
 {
-    #[Route('/utilisateur/edition/{id}', name: 'users.edit')]
-    public function edit(Users $user, Request $request, EntityManagerInterface $manager): Response // Correction du type de $request
+    #[Route('/utilisateur/edition/{id}', name: 'users.edit', methods: ['GET', 'POST'])]
+    public function edit(Users $user, Request $request, EntityManagerInterface $manager): Response 
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -32,11 +32,11 @@ class UsersController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'succes',
+                'success',
                 'Les informations de votre compte ont bien été modifiées'
             );
 
-            return $this->redirectToRoute('app_home'); // Correction : ajout du retour
+            return $this->redirectToRoute('app_book'); // Correction : ajout du retour
         }
 
         return $this->render('users/edit.html.twig', [

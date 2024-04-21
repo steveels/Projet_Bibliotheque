@@ -62,7 +62,6 @@ class AppFixtures extends Fixture
             // Persister l'utilisateur
             $manager->persist($user);
         }
-
         // Enregistrer les modifications dans la base de données
         $manager->flush();
     }
