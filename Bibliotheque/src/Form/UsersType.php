@@ -60,11 +60,6 @@ class UsersType extends AbstractType
             ],
             'label' => 'Numéro de téléphone'
         ])
-        ->add('submit', SubmitType::class, [
-            'attr' => [
-                'class' => 'btn btn-primary mt-4'
-            ]
-        ])
         ->add('plainPassword', PasswordType::class, [
             // instead of being set onto the object directly,
             // this is read and encoded in the controller
@@ -85,6 +80,11 @@ class UsersType extends AbstractType
                 ]),
             ],
             'label' => 'Mot de passe'
+        ])
+        ->add('submit', SubmitType::class, [
+            'attr' => [
+                'class' => 'btn btn-primary mt-4'
+            ]
         ]);
         
     }
