@@ -310,4 +310,11 @@ public function setCategorieId(?int $categorie_id): self
     }
 
     
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
+
+
+    
 }

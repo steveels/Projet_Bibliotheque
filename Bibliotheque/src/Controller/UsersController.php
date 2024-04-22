@@ -23,7 +23,7 @@ class UsersController extends AbstractController
     }
 
     #[Route('/utilisateur/edition/{id}', name: 'users.edit', methods: ['GET', 'POST'])]
-    public function edit(Users $user, Request $request, UserPasswordHasherInterface $hasher): Response 
+    public function edit($id, Users $user, Request $request, UserPasswordHasherInterface $hasher): Response 
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -58,11 +58,12 @@ class UsersController extends AbstractController
 
         return $this->render('users/edit.html.twig', [
             'form' => $form->createView(),
+            'id'=> $id,
         ]);
     }
 
     #[Route('/utilisateur/edition-mot-de-passe/{id}', name : 'user.edit.password', methods: ['GET', 'POST'])]
-    public function editPassword(Users $user, Request $request, UserPasswordHasherInterface $hasher) : Response
+    public function editPassword($id, Users $user, Request $request, UserPasswordHasherInterface $hasher) : Response
     {
         $form = $this->createForm(UserPasswordType::class);
 
@@ -93,7 +94,8 @@ class UsersController extends AbstractController
         }
 
         return $this->render('users/edit_password.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'id'=> $id,
         ]);
     }
 }

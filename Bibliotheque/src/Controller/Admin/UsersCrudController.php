@@ -45,9 +45,6 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('city'),
             TextField::new('zip_code'),
             IntegerField::new('phoneNumber'),
-            ArrayField::new('reservations'),
-            ArrayField::new('empruntLivres'),
-            ArrayField::new('commentaires'),
             BooleanField::new('banni')
             
         ];
