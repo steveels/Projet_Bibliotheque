@@ -9,9 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfilController extends AbstractController
 {
-    #[Route('/profile', name: 'app_profil')]
+    #[Route('/profile/{id}', name: 'app_profil')]
     #[IsGranted('ROLE_USER')]
-    public function index(): Response
+    public function index($id): Response
     {
         $user = $this->getUser();
 
@@ -19,6 +19,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
             'user' => $user,
+            'id' => $id
         ]);
     }
 }
