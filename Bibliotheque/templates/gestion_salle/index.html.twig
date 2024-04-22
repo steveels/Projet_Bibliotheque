@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion des Salles{% endblock %}
+{% block title %}{{'Room Management' | trans}}{% endblock %}
 
 {% block body %}
 <div class="container mt-3">
-    <h1 class="text-center mb-4">Nos Salles</h1>
+    <h1 class="text-center mb-4">{{'Our Rooms' | trans}}</h1>
     <div class="row justify-content-center">
         {% for room in rooms %}
         <div class="col-md-6 col-lg-4 mb-4">
@@ -13,8 +13,8 @@
                     <h5 class="card-title">{{ room.name }}</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Capacité : {{ room.capability }} personnes</p>
-                    <p class="card-text">Équipements :</p>
+                    <p class="card-text">{{'Capacity:' | trans}} {{ room.capability }} {{'people:' | trans}}</p>
+                    <p class="card-text">{{'Equipment:' | trans}}</p>
                     <ul class="list-unstyled">
                         {% for equip in room.equipement %}
                         <li>{{ equip.nom }}</li>
@@ -22,12 +22,12 @@
                     </ul>
                 </div>{% if is_granted('ROLE_USER')  %}
                 <div class="card-footer">
-                    <a href="{{ path('app_reservation', {id: room.id}) }}" class="btn btn-primary btn-block">Réserver</a>
+                    <a href="{{ path('app_reservation', {id: room.id}) }}" class="btn btn-primary btn-block">{{'To book' | trans}}</a>
                     
                 </div>{% else %}
                   <div class="card-footer text-center">
-                  <p class='alert-danger'>Veuillez vous inscrires ou vous connectez.</p>
-                    <a href="{{ path('app_login') }}" class="btn btn-primary btn-block">Cliquez ici</a>
+                  <p class='alert-danger'>{{'Please register or log in.' | trans}}</p>
+                    <a href="{{ path('app_login') }}" class="btn btn-primary btn-block">{{'Click here' | trans}}</a>
                     
                 </div>
                 
