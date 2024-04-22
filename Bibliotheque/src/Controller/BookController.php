@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Book; 
 use App\Entity\Categories;
-use App\Entity\Reservation;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;

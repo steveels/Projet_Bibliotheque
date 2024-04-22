@@ -9,7 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RoomType extends AbstractCrudController
+class RoomType extends AbstractType
 {
     public static function getEntityFqcn(): string
     {
@@ -24,6 +24,8 @@ class RoomType extends AbstractCrudController
                 'class' => Equipements::class,
                 'choice_label' => 'nom',
                 'multiple' => true,
+                'expanded'  => true,
+                
             ])
         ;
     }
