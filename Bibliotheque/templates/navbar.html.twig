@@ -1,32 +1,46 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href={{path("app_home")}}>Navbar</a>
+    <a class="navbar-brand" href={{path("app_home")}}>Biblio</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href={{path("app_home")}}>Home</a>
+          <a class="nav-link active" aria-current="page" href={{path("app_home")}}>{{'Home' | trans}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href={{path("app_book")}}>notre bibibliotheque</a>
+          <a class="nav-link" href={{path("app_book")}}>{{'Our library' | trans}}</a>
         </li>
         <li class="nav-item">
-          <a href={{path("app_gestion_salle")}} class="nav-link" >Nos salles</a>
+          <a href={{path("app_gestion_salle")}} class="nav-link" >{{'Our rooms' | trans}}</a>
         </li>
         <li class="nav-item">
-          <a href={{path("app_profil")}} class="nav-link" >Mon profile</a>
+          <a href={{path("app_profil")}} class="nav-link" >{{'My profile' | trans}}</a>
         </li>
         <li class="nav-item">
-        <a href={{path("app_register")}} class="nav-link" >Inscriptions</a>
+        <a href={{path("app_register")}} class="nav-link" >{{'Registration' | trans}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href={{path("app_login")}}>Connexion</a>
+          <a class="nav-link" href={{path("app_login")}}>{{'Connection' | trans}}</a>
         </li>
-        <a href="{{ path('app_home', {'_locale': 'fr'}) }}">Français</a>
-        <a href="{{ path('app_home', {'_locale': 'en'}) }}">English</a>
+     
+      
+
+        
       </ul>
+       <div class="position-fixed top-0 end-0 p-3">
+        <div class="d-flex">
+            {% for locale in locales %}
+                {% if locale != app.request.locale %}
+                <p>{{locale}}</p>
+                    <a href="{{ path('change_locale', {'locale': locale}) }}" class="me-2">
+                        <img src="{{ asset('img/'~locale~'.png') }}" alt="{{ locale }}" class="flag-icon" height="25px">
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
     </div>
   </div>
 </nav>
