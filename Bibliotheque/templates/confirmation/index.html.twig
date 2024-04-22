@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConfirmationController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<h2>Confirmation de l'emprunt</h2>
+<div>
+    <p>Titre du livre: {{ emprunt.book.title }}</p>
+    <p>Date d'emprunt: {{ emprunt.dateEmprunt|date('d/m/Y') }}</p>
+    <p>Date de restitution: {{ emprunt.dateRetour|date('d/m/Y') }}</p>
+    <form action="{{ path('rendu_effectif', {'id': emprunt.id}) }}" method="post">
+        <label for="date_rendu_effectif">Date de rendu effectif:</label>
+        <input type="date" id="date_rendu_effectif" name="date_rendu_effectif">
+        <button type="submit">Rendu effectif</button>
+    </form>
+</div>
+{% endblock %}

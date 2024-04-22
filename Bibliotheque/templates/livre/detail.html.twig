@@ -36,13 +36,13 @@
             Nouvelle        
          {% elseif book.getCategorieId() == 6 %}
             Enfants
-
-        {% endif %}
+     {% endif %}
     </p>
-     <a href="{{ path('app_emprunt', {'id': book.id}) }}" class="btn btn-primary">Emprunter</a>
+
+     {% if book.disponibility %}
+        <a href="{{ path('app_emprunt', {'id': book.id}) }}" class="btn btn-primary">Emprunter</a>
+    {% else %}
+        <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
+    {% endif %}
 </div>
-
-
-
-
 {% endblock %}
