@@ -15,26 +15,26 @@ class UserPasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('plainPassword', PasswordType::class, [
-                'mapped' => false,
+            ->add('currentPassword', PasswordType::class, [
+                'mapped' => false, 
+                'label' => 'Mot de passe actuel',
                 'attr' => [
-                    'autocomplete' => 'plainPassword',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'autocomplete' => 'current-password' 
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your current password',
+                        'message' => 'Veuillez saisir votre mot de passe actuel.',
                     ]),
                 ],
-                'label' => 'Mot de passe actuel'
             ])
             ->add('newPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
                 'options' => ['attr' => ['class' => 'form-control']],
                 'required' => true,
-                'first_options'  => ['label' => 'newPassword'],
-                'second_options' => ['label' => 'newPassword'],
+                'first_options'  => ['label' => 'nouveau mot de passe'],
+                'second_options' => ['label' => 'Confirmer le nouveau mot de passe'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a new password',

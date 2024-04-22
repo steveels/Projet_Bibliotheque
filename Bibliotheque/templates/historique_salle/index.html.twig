@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HistoriqueSalleController!{% endblock %}
+
+{% block body %}
+{% set firstNameDisplayed = false %}
+
+    {% for reservation in reservations %}
+        {% if not firstNameDisplayed %}
+            <h1>Bonjour {{ reservation.user.firstname }} des livres que vous avez lu</h1>
+        {% set firstNameDisplayed = true %} 
+        {% endif %}   
+    {% endfor %}
+
+
+        <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Nom de la salle</th>
+            <th scope="col">Capacité de la salle</th>
+            <th scope="col">Equipements</th>
+            <th scope="col">Date début de réservation</th>
+            <th scope="col">Date fin de réservation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                <th scope="row">{{ reservation.room.name }}</th>
+                <td>{{ reservation.room.capability }}</td>
+                <td>
+                    {% for equipement in reservation.room.equipement %}
+                        {{ equipement.nom }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ reservation.dateDebut |date('Y-m-d H:i:s') }}</td>
+                <td>{{ reservation.dateFin |date('Y-m-d H:i:s') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+{% endblock %}
