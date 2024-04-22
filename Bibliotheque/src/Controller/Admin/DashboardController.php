@@ -36,6 +36,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', Users::class);
         yield MenuItem::linkToRoute('Gestion Salles', 'fa fa-person-shelter','app_admin_room_index' );
         yield MenuItem::linkToCrud('Gestion des commentaires', 'fa fa-comment', Commentaires::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

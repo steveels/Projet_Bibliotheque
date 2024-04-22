@@ -21,15 +21,20 @@ class CommentairesCrudController extends AbstractCrudController
 {
     return [
         IdField::new('id')->onlyOnIndex(),
+        AssociationField::new('book')
+            ->formatValue(function ($value, $entity) {
+                if ($value !== null) {
+                    return $value->getTitle();
+                }
+                return 'Livre non défini';
+            }),
         TextField::new('content'),
         DateTimeField::new('dateAjout')->onlyOnIndex(),
         AssociationField::new('comUser')
             ->formatValue(function ($value, $entity) {
-                // Vérifiez d'abord si $value est défini et non null
                 if ($value !== null) {
                     return $value->getFirstName();
                 }
-                // Si $value est null, retournez une valeur par défaut ou un message d'erreur
                 return 'Utilisateur non défini';
             }),
     ];
