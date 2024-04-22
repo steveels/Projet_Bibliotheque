@@ -1,0 +1,8 @@
+{{ form_start(form, {'attr': {'class': 'form-group'}}) }}
+    {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.capability, {'attr': {'class': 'form-control'}}) }}
+    {{ form_row(form.equipement, {'attr': {'class': 'form-control'}}) }}
+    <div class="d-flex justify-content-center mt-2">
+    <button class="btn btn-warning ">{{ button_label|default('Sauvegarder') }}</button>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique livres {% endblock %}
+
+{% block body %}
+
+    {% set firstNameDisplayed = false %}
+
+    {% for emprunt in emprunts %}
+        {% if not firstNameDisplayed %}
+            <h1>Bonjour {{ emprunt.user.firstname }} des livres que vous avez lu</h1>
+        {% set firstNameDisplayed = true %} 
+        {% endif %}   
+    {% endfor %}
+
+
+        <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Titre</th>
+            <th scope="col">Auteur</th>
+            <th scope="col">Date emprunt</th>
+            <th scope="col">Date restitution</th>
+            <th scope="col">Date restitution effective</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprunt in emprunts %}
+                <tr>
+                <th scope="row">{{ emprunt.book.title }}</th>
+                <td>{{ emprunt.book.author }}</td>
+                <td>{{ emprunt.dateEmprunt|date('Y-m-d H:i:s') }}</td>
+                <td>{{ emprunt.dateRestitution|date('Y-m-d H:i:s') }}</td>
+                <td>{{ emprunt.dateRestituionEffective|date('Y-m-d H:i:s') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+{% endblock %}
