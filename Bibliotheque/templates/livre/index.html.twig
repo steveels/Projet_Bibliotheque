@@ -4,9 +4,9 @@
 {% block title %}{{'List of books' | trans}}{% endblock %}
 
 {% block body %}
-    {% if app.flashes('succes') is not empty %}
+    {% if app.flashes('success') is not empty %}
         <div class="alert alert-success">
-            {% for message in app.flashes('succes') %}
+            {% for message in app.flashes('success') %}
                 {{ message }}
             {% endfor %}
         </div>

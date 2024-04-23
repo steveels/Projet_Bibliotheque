@@ -76,7 +76,7 @@ class UsersType extends AbstractType
                     'max' => 4096,
                 ]),
             ],
-            'label' => 'Mot de passe'
+            'label' => 'Valider votre mot de passe pour modifier vos informations'
         ])
         ->add('submit', SubmitType::class, [
             'attr' => [

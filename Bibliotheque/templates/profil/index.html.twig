@@ -16,8 +16,8 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <p><a href={{ path('users.edit', {'id': id}) }} class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mes coordonnées</a></p></div>
-                <p><a href={{ path('user.edit.password', {'id': id}) }} class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mot de passe</a></p></div>
+                <p><a href={{ path('users.edit') }} class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mes coordonnées</a></p></div>
+                <p><a href={{ path('user.edit.password')}} class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Mot de passe</a></p></div>
             </div>
         </div>
         <div class="accordion-item">
@@ -33,4 +33,6 @@
             </div>
         </div>
     </div>
+
+    
 {% endblock %}
