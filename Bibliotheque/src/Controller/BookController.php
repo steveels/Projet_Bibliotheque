@@ -49,10 +49,23 @@ class BookController extends AbstractController
         
         // Rend la vue Twig en passant les détails du livre
         return $this->render('livre/detail.html.twig', [
-            'livre' => $livre,
+            'book' => $livre,
         ]);
     }
+ /**
+     * @Route("/livre/{id}", name="livre_detail")
+     */
+    public function detail(int $id, BookRepository $bookRepository): Response
+    {
+        $book = $bookRepository->find($id);
 
+          
+        
+        return $this->render('livre/detail.html.twig', [
+            'book' => $book,
+            
+        ]);
+    }
    
 }
     
