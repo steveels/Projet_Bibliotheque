@@ -21,9 +21,9 @@ class SecurityController extends AbstractController
     #[Route(path: '/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('home/index.html.twig');
-        }
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('app_book');
+        // }
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -32,7 +32,7 @@ class SecurityController extends AbstractController
 
         if ($user instanceof Users && $user->isBanni()) {
             $this->addFlash('error', 'Votre compte a été banni. Vous ne pouvez pas vous connecter.');
-            return $this->redirectToRoute('app_book'); 
+            // return $this->redirectToRoute('app_book'); 
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
