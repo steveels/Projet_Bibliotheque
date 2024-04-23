@@ -24,19 +24,19 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Prenom'
+                'label' => 'First name'
             ])
             ->add('lastname', TextType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Nom'
+                'label' => 'Name'
             ])
             ->add('birthdate', BirthdayType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Date d\'anniversaire'
+                'label' => 'Birthday date'
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
@@ -48,25 +48,25 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Adresse'
+                'label' => 'Adress'
             ])
             ->add('city', TextType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ],
-                'label' => 'Ville'
+                'label' => 'City'
             ])
             ->add('zip_code', TextType::class, [
                 'attr'=>[
                     'class'=> 'form-control'
                 ],
-                'label' => 'Code postale'
+                'label' => 'Zip code'
             ])
             ->add('phoneNumber', TextType::class, [
                 'attr'=>[
                     'class'=> 'form-control'
                 ],
-                'label' => 'Numéro de téléphone'
+                'label' => 'Phone number'
             ])
             ->add('RGPDConsent', CheckboxType::class, [
                 'mapped' => false,
@@ -75,7 +75,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-                'label' => 'En m\'inscrivant dans ce site j\'accepte la politique de confidentialité'
+                'label' => 'I agree to the processing of my personal data by the company'
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -96,7 +96,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-                'label' => 'Mot de passe'
+                'label' => 'Password'
             ])
         ;
     }

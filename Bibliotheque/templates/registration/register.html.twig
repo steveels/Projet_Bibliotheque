@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}{{'Registration' | trans}}{% endblock %}
 
 {% block body %}
 <section class="container">
     <div class="row">
         <div class="col">
-            <h1>Inscription</h1>
+            <h1>{{'Registration' | trans}}</h1>
 
             {{ form_errors(registrationForm) }}
 
             {{ form_start(registrationForm) }}
                 <fieldset class="mb-3">
-                    <legend>Mon identité</legend>
+                    <legend>{{'My identity' | trans}}</legend>
                     {{ form_row(registrationForm.firstname) }}
                     {{ form_row(registrationForm.lastname) }}
                     {{ form_row(registrationForm.birthdate) }}
@@ -20,7 +20,7 @@
                 </fieldset>
                 
                 <fieldset class="mb-3">
-                    <legend>Mes Coordonnées</legend>
+                    <legend>{{'My Contact Information' | trans}}</legend>
                     {{ form_row(registrationForm.adress) }}
                     {{ form_row(registrationForm.zip_code) }}
                     {{ form_row(registrationForm.city) }}
@@ -32,7 +32,7 @@
                 }) }}
                 {{ form_row(registrationForm.RGPDConsent) }}
 
-                <button type="submit" class="btn btn-primary bnt-lg my-3">M'inscrire</button>
+                <button type="submit" class="btn btn-primary bnt-lg my-3">{{'Register' | trans}}</button>
             {{ form_end(registrationForm) }}
         </div>
     </div>
