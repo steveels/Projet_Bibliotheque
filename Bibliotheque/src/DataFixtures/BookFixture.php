@@ -20,6 +20,10 @@ class BookFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $image = [
+            'https://boutique.annabac.com/system/product_pictures/data/009/953/889/large/9782401078499-001-X.jpg?1687516306',
+            
+        ];
         // Génération de 5 livres
         for ($i = 0; $i < 20; $i++) {
             $livre = new Book();
@@ -28,10 +32,12 @@ class BookFixture extends Fixture
             $livre->setState($this->faker->sentence(1));
             $livre->setDateEmprunt($this->faker->dateTimeThisMonth());
             $livre->setDisponibility($this->faker->boolean());
-
+            
+            $livre->setImage($this->faker->randomElement($image));
             // Génération aléatoire d'un état
             $etat = new Etat();
-            $etat->setTypeEtat($this->faker->randomElement(['Nouveau', 'Bon', 'Usé']));
+            $etat->setTypeEtat($this->faker->randomElement(['excellent',
+            'correct','moyen','mauvais']));
             $manager->persist($etat);
 
             $livre->setEtat($etat);
