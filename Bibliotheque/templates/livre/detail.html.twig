@@ -32,7 +32,10 @@
             <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
         {% endif %}
         {# Ajoutez ici le bouton ou le lien pour demander une extension de prêt #}
-        <a href="{{ path('app_emprunt_livre', { 'id': emprunt_livre.id }) }}" class="btn btn-primary">Demander une extension</a>
+        {% if emprunt_livre is defined %}
+        
+            <a href="{{ path('app_emprunt_livre', { 'id': emprunt_livre.id }) }}" class="btn btn-primary">Demander une extension</a>
+        {% endif %}
     {% endif %}
 </div>
 {% endblock %}

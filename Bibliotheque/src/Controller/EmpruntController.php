@@ -14,20 +14,32 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EmpruntController extends AbstractController
 {
-    #[Route('/emprunt', name: 'app_emprunt')]
-    public function index(BookRepository $empruntLivreRepository): Response
+    #[Route('/', name: 'app_emprunt_livre_index', methods: ['GET'])]
+    public function index(Request $request, EmpruntLivreRepository $empruntLivreRepository): Response
     {
-        // Récupérer les emprunts de livres depuis le repository
+        // Récupérer tous les emprunts
         $emprunts = $empruntLivreRepository->findAll();
-
-        // Passer les données au template Twig
-        return $this->render('emprunt/index.html.twig', [
-            'emprunts' => $emprunts,
+    
+        // Créer un tableau pour stocker les livres associés à chaque emprunt
+        $books = [];
+    
+        // Pour chaque emprunt, récupérer le livre associé
+        foreach ($emprunts as $emprunt) {
+            $book = $emprunt->getBook();
+            // Si le livre est trouvé, l'ajouter au tableau avec l'emprunt correspondant
+            if ($book) {
+                $books[] = [
+                    'emprunt' => $emprunt,
+                    'book' => $book,
+                ];
+            }
+        }
+    
+        // Retourner une réponse en utilisant un modèle Twig avec les données récupérées
+        return $this->render('votre_template.twig', [
+            'books' => $books,
         ]);
-        
-       
     }
-
     
     #[Route('/nouvel-emprunt/{book_id}', name: 'nouvel_emprunt')]
     public function nouvelEmprunt(Request $request, EntityManagerInterface $entityManager, Book $book): Response
@@ -71,10 +83,22 @@ class EmpruntController extends AbstractController
 
     // Enregistrez les modifications dans la base de données
     $entityManager->flush();
+    $valeur = 'Valeur de démonstration';
 
     // Redirigez l'utilisateur vers une page de confirmation ou une autre page appropriée
     return $this->render('emprunt_livre/index.html.twig', ['variable' => $valeur]);
 
+}
+#[Route('/livre/{id}', name: 'app_livre_detail', methods: ['GET'])]
+public function detail(Book $book, EmpruntLivreRepository $empruntLivreRepository): Response
+{
+    // Récupérer les détails de l'emprunt du livre
+    $empruntLivre = $empruntLivreRepository->findOneBy(['book' => $book]);
+
+    return $this->render('livre/detail.html.twig', [
+        'book' => $book,
+        'emprunt_livre' => $empruntLivre,
+    ]);
 }
 
 }
