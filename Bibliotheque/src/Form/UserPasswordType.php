@@ -17,7 +17,7 @@ class UserPasswordType extends AbstractType
         $builder
             ->add('currentPassword', PasswordType::class, [
                 'mapped' => false, 
-                'label' => 'Mot de passe actuel',
+                'label' => 'Current Password',
                 'attr' => [
                     'class' => 'form-control',
                     'autocomplete' => 'current-password' 
@@ -33,8 +33,8 @@ class UserPasswordType extends AbstractType
                 'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
                 'options' => ['attr' => ['class' => 'form-control']],
                 'required' => true,
-                'first_options'  => ['label' => 'nouveau mot de passe'],
-                'second_options' => ['label' => 'Confirmer le nouveau mot de passe'],
+                'first_options'  => ['label' => 'New Password'],
+                'second_options' => ['label' => 'Confirm the new password'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a new password',
@@ -50,7 +50,7 @@ class UserPasswordType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Changer mon mot de passe'
+                'label' => 'Validate'
             ]);
     }
 }

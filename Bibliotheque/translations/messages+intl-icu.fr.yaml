@@ -4,7 +4,10 @@ English: English
 'Our rooms': 'Nos salles'
 'My profile': 'Mon profil'
 Registration: Inscription
+
 Connection: Connexion
+
+
 French: French
 'List of books': 'Liste des livres'
 'see more': 'Voir plus'
@@ -13,7 +16,7 @@ French: French
 'Capacity:': 'Capacité:'
 'people:': 'personnes:'
 'Equipment:': 'Equipements:'
-'To book': 'Réserver'
+'To book': Réserver
 'Please register or log in.': ' enregistrez-vous ou connectez-vous.'
 'Click here': 'Cliquez ici'
 'Book Details': 'Détails du livre'
@@ -25,5 +28,35 @@ Register: Inscription
 Disconnect: Déconnexion
 'Log in': 'Se connecter'
 E-mail: E-mail
-Password: 'Mot de passe'
 'Remember me': 'Se souvenir de moi'
+Connection: Connexion
+Log-out: Deconnexion
+My personal information: Mes informations personnelles
+Welcome to your profile: Bienvenue sur votre profil
+My contact details: Mes informations de contact
+My reservations: Mes réservations
+Validate your password to modify your information: Vérifiez votre mot de passe pour modifier vos informations
+User Information Edit Form: Formulaire d'édition des informations utilisateur
+My book reservations: Mes réservations de livres
+My room reservations: Mes réservations de salles
+Hello: Bonjour
+books you have read: livres que vous avez lus
+Equipment: Équipements
+Room capacity: Capacité de la salle
+Room name: Nom de la salle
+Reservation start date: Date de début de la réservation
+Reservation end date: Date de fin de la réservation
+Title: Titre
+Effective return date: Date d'échéance
+Return date: Date de retour
+Loan date: Date de prêt
+Author: Auteur
+User profile: Profil utilisateur
+User modification: Modification de l'utilisateur
+User password change: Changement de mot de passe utilisateur
+History of books: Historique des livres
+History Rooms: Historique des salles
+
+
+
+

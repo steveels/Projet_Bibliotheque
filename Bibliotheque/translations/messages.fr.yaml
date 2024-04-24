@@ -1,5 +1,5 @@
 First name : Prenom
-Name : nom
+Name : Nom
 Birthday date : Date de naissance
 Adress : Adresse
 Zip code : Code postal
@@ -7,3 +7,8 @@ City : Ville
 Phone number : Numéro de téléphone
 Password : Mot de passe
 I agree to the processing of my personal data by the company : J'accepte le traitement de mes données personnelles par la société
+Validate: Valider
+Current Password: Mot de passe actuel
+New Password: Nouveau mot de passe
+Confirm the new password: Confirmer le nouveau mot de passe
+User Password Change Form: Formulaire de changement de mot de passe utilisateur
