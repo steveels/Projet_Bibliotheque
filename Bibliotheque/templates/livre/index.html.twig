@@ -1,20 +1,22 @@
-
- {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{{'List of books' | trans}}{% endblock %}
 
 {% block body %}
+{% for livres in livres %}
    <div class="example-wrapper">
-    <h1>{{ book.title }}</h1>
-    <img src="{{ book.image }}" alt="{{ book.title }}" class="book-image" />
-    <p>{{ book.resume }}</p>
-    <p>État du livre : {{ book.etat }}</p>
-    <p>Catégorie : {{ book.categorie }}</p>
-    {% if book.disponibility %}
-        <a href="{{ path('app_emprunt', {'id': book.id}) }}" class="btn btn-primary">Emprunter</a>
+
+    <h1>{{ livres.title }}</h1>
+    <img src="{{ livres.image }}" alt="{{ livres.title }}" class="book-image" />
+    <p>{{ livres.resume }}</p>
+    <p>État du livre : {{ livres.etat.typeEtat  }}</p>
+    <p>Catégorie : {{ livres.categorie.name }}</p>
+    {% if livres.disponibility %}
+        <a href="{{ path('app_emprunt', {'id': livres.id}) }}" class="btn btn-primary">Emprunter</a>
     {% else %}
         <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
     {% endif %}
+    {% endfor %}
 
     <h1>{{'List of books' | trans}}</h1>
     <ul>
@@ -22,10 +24,10 @@
             <li>{{ book.title }}</li>
             <img src="{{ book.image }}" alt="{{ book.title }}" class="book-image" />
             <li>{{ book.author }}</li>
-         <a href="{{ path("details",{id:book.id}) }}">{{'See more' | trans}}</a>   
-            
+         <a href="{{ path("details",{id:book.id}) }}">{{'See more' | trans}}</a>
+
         {% endfor %}
-           
+
     </ul>
 
 </div>

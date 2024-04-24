@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use DateInterval;
 use App\Entity\Book;
 use App\Entity\EmpruntLivre;
 use App\Repository\BookRepository;
@@ -28,7 +28,6 @@ class EmpruntController extends AbstractController
        
     }
 
-   
     
     #[Route('/nouvel-emprunt/{book_id}', name: 'nouvel_emprunt')]
     public function nouvelEmprunt(Request $request, EntityManagerInterface $entityManager, Book $book): Response
@@ -51,5 +50,31 @@ class EmpruntController extends AbstractController
         // Rediriger vers la page de confirmation d'emprunt
         return $this->redirectToRoute('page_de_confirmation', ['id' => $emprunt->getId()]);
     }
+
+    public function demandeExtensionPret(Request $request, EmpruntLivre $emprunt, EntityManagerInterface $entityManager): Response
+{
+    // Récupérez la date actuelle
+    $currentDate = new \DateTime();
+
+    // Récupérez la date de restitution prévue de l'emprunt
+    $dateRestitutionPrevue = $emprunt->getDateRestitutionPrevue();
+
+    // Créez un nouvel objet DateTime avec la date modifiée
+    $nouvelleDateRestitutionPrevue = new \DateTime();
+    $nouvelleDateRestitutionPrevue->setTimestamp($dateRestitutionPrevue->getTimestamp()); // Utilisez le timestamp de la date prévue
+
+    // Ajoutez un intervalle de 6 jours à la date actuelle
+    $nouvelleDateRestitutionPrevue->add(new \DateInterval('P6D'));
+
+    // Mettez à jour la date de restitution prévue de l'emprunt
+    $emprunt->setDateRestitutionPrevue($nouvelleDateRestitutionPrevue);
+
+    // Enregistrez les modifications dans la base de données
+    $entityManager->flush();
+
+    // Redirigez l'utilisateur vers une page de confirmation ou une autre page appropriée
+    return $this->render('emprunt_livre/index.html.twig', ['variable' => $valeur]);
+
+}
 
 }
