@@ -146,3 +146,4 @@ Error: Erreur
 'Your password should be at least {{ limit }} characters': '__Your password should be at least {{ limit }} characters'
 'Please enter your current password': '__Please enter your current password'
 'Please enter a new password': '__Please enter a new password'
+'Veuillez saisir votre mot de passe actuel.': '__Veuillez saisir votre mot de passe actuel.'

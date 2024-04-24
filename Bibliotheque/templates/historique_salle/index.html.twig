@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HistoriqueSalleController!{% endblock %}
+{% block title %}{{'History Rooms' | trans}}{% endblock %}
 
 {% block body %}
 {% set firstNameDisplayed = false %}
 
     {% for reservation in reservations %}
         {% if not firstNameDisplayed %}
-            <h1>Bonjour {{ reservation.user.firstname }} des livres que vous avez lu</h1>
+            <h1>{{'Hello' | trans}} {{ reservation.user.firstname }} {{'books you have read' | trans}}</h1>
         {% set firstNameDisplayed = true %} 
         {% endif %}   
     {% endfor %}
@@ -16,11 +16,11 @@
         <table class="table table-striped">
         <thead>
             <tr>
-            <th scope="col">Nom de la salle</th>
-            <th scope="col">Capacité de la salle</th>
-            <th scope="col">Equipements</th>
-            <th scope="col">Date début de réservation</th>
-            <th scope="col">Date fin de réservation</th>
+            <th scope="col">{{'Room name' | trans}}</th>
+            <th scope="col">{{'Room capacity' | trans}}</th>
+            <th scope="col">{{'Equipment' | trans}}</th>
+            <th scope="col">{{'Reservation start date' | trans}}</th>
+            <th scope="col">{{'Reservation end date' | trans}}</th>
             </tr>
         </thead>
         <tbody>

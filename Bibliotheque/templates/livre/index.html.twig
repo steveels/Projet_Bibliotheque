@@ -9,19 +9,20 @@
             {% for message in app.flashes('success') %}
                 {{ message }}
             {% endfor %}
+           
         </div>
    <div class="example-wrapper">
     <h1>{{ book.title }}</h1>
     <img src="{{ book.image }}" alt="{{ book.title }}" class="book-image" />
     <p>{{ book.resume }}</p>
     <p>État du livre : {{ book.etat }}</p>
-    <p>Catégorie : {{ book.categorie }}</p>
+    <p>Catégorie : {{ book.categorie }}</p> 
     {% if book.disponibility %}
         <a href="{{ path('app_emprunt', {'id': book.id}) }}" class="btn btn-primary">Emprunter</a>
     {% else %}
         <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
     {% endif %}
-
+{% endif %}
     <h1>{{'List of books' | trans}}</h1>
     <ul>
         {% for book in livres %}
