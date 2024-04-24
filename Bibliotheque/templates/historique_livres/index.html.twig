@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Historique livres {% endblock %}
+{% block title %}{{'History of books' | trans }} {% endblock %}
 
 {% block body %}
 
@@ -17,11 +17,11 @@
         <table class="table table-striped">
         <thead>
             <tr>
-            <th scope="col">Titre</th>
-            <th scope="col">Auteur</th>
-            <th scope="col">Date emprunt</th>
-            <th scope="col">Date restitution</th>
-            <th scope="col">Date restitution effective</th>
+            <th scope="col">{{'Title' | trans}}</th>
+            <th scope="col">{{'Author' | trans}}</th>
+            <th scope="col"> {{'Loan date' | trans}}</th>
+            <th scope="col">{{'Return date' | trans}}</th>
+            <th scope="col">{{'Effective return date' | trans}}</th>
             </tr>
         </thead>
         <tbody>

@@ -22,43 +22,43 @@ class UsersType extends AbstractType
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Prenom'
+            'label' => 'First name'
         ])
         ->add('lastname', TextType::class, [
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Nom'
+            'label' => 'Name'
         ])
         ->add('birthdate', BirthdayType::class, [
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Date d\'anniversaire'
+            'label' => 'Birthday date'
         ])
         ->add('adress', TextType::class, [
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Adresse'
+            'label' => 'Adress'
         ])
         ->add('city', TextType::class, [
             'attr' => [
                 'class' => 'form-control'
             ],
-            'label' => 'Ville'
+            'label' => 'City'
         ])
         ->add('zip_code', TextType::class, [
             'attr'=>[
                 'class'=> 'form-control'
             ],
-            'label' => 'Code postale'
+            'label' => 'Zip code'
         ])
         ->add('phoneNumber', TextType::class, [
             'attr'=>[
                 'class'=> 'form-control'
             ],
-            'label' => 'Numéro de téléphone'
+            'label' => 'Phone number'
         ])
         ->add('plainPassword', PasswordType::class, [
             'mapped' => false,
@@ -76,15 +76,9 @@ class UsersType extends AbstractType
                     'max' => 4096,
                 ]),
             ],
-            'label' => 'Valider votre mot de passe pour modifier vos informations'
-        ])
-        ->add('submit', SubmitType::class, [
-            'attr' => [
-                'class' => 'btn btn-primary mt-4'
-            ]
+            'label' => 'Validate your password to modify your information'
         ]);
-        
-    }
+        }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
