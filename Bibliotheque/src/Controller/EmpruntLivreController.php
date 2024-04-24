@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Entity\EmpruntLivre;
 use App\Form\EmpruntLivreType;
-use App\Repository\EmpruntLivreRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\EmpruntLivreRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/emprunt/livre')]
 class EmpruntLivreController extends AbstractController
@@ -79,10 +80,14 @@ public function index(EmpruntLivreRepository $empruntLivreRepository): Response
     }
 
     #[Route('/{id}', name: 'app_emprunt_livre_show', methods: ['GET'])]
-    public function show(EmpruntLivre $empruntLivre): Response
+    public function show(Book $book, EmpruntLivreRepository $empruntLivreRepository): Response
     {
-        return $this->render('emprunt_livre/show.html.twig', [
-            'emprunt_livre' => $empruntLivre,
+        // Récupérer l'emprunt du livre (s'il existe)
+        $empruntLivre = $empruntLivreRepository->findOneBy(['book' => $book]);
+    
+        return $this->render('livre/detail.html.twig', [
+            'book' => $book,
+            'emprunt_livre' => $empruntLivre, // Passer l'emprunt du livre à la vue
         ]);
     }
 
@@ -115,5 +120,17 @@ public function index(EmpruntLivreRepository $empruntLivreRepository): Response
         return $this->redirectToRoute('app_emprunt_livre_index', [], Response::HTTP_SEE_OTHER);
     }
 
-   
+    #[Route('/livre/{id}', name: 'app_livre_detail', methods: ['GET'])]
+    public function detail(Book $book, EmpruntLivreRepository $empruntLivreRepository): Response
+    {
+        // Récupérer les détails de l'emprunt du livre
+        $empruntLivre = $empruntLivreRepository->findOneBy(['book' => $book]);
+    
+        return $this->render('livre/detail.html.twig', [
+            'book' => $book,
+            'emprunt_livre' => $empruntLivre,
+        ]);
+    }
+  
+
 }
