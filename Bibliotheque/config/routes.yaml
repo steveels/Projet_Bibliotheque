@@ -10,3 +10,11 @@ detail_livre:
     methods: GET
     requirements:
         id: '\d+'
+
+
+
+app_emprunts_index:
+    path: '/emprunts'
+    controller: 'App\Controller\EmpruntLivreController::index'
+    methods: ['GET']
+       

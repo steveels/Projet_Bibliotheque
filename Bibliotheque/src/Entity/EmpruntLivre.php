@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\EmpruntLivreRepository;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EmpruntLivreRepository;
 
 #[ORM\Entity(repositoryClass: EmpruntLivreRepository::class)]
 class EmpruntLivre
@@ -33,8 +34,12 @@ class EmpruntLivre
  /**
      * @ORM\Column(type="datetime")
      */
-    private $dateRetour;
+    private ?\DateTimeInterface $dateRestitutionPrevue = null;
 
+   /**
+ * @ORM\Column(type="datetime")
+ */
+private ?\DateTimeInterface $dateRetour = null;
 
     public function getId(): ?int
     {
@@ -46,7 +51,7 @@ class EmpruntLivre
         return $this->dateEmprunt;
     }
 
-    public function setDateEmprunt(\DateTimeInterface $dateEmprunt): static
+    public function setDateEmprunt(DateTimeInterface $dateEmprunt): static
     {
         $this->dateEmprunt = $dateEmprunt;
 
@@ -113,9 +118,23 @@ class EmpruntLivre
         return $this;
     }
 
-    public function __toString(): string
+    public function getDateRestitutionPrevue(): ?\DateTimeInterface
     {
-        return $this->getFirstName() . ' ' . $this->getLastName();
+        return $this->dateRestitutionPrevue;
     }
+    
+    public function setDateRestitutionPrevue(\DateTimeInterface $dateRestitutionPrevue): self
+    {
+        $this->dateRestitutionPrevue = $dateRestitutionPrevue;
+    
+        return $this;
+    }
+
+    public function __toString(): string
+{
+    return (string) $this->getId();
+}
+
+
 
 }
