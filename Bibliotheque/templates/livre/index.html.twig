@@ -4,6 +4,12 @@
 {% block title %}{{'List of books' | trans}}{% endblock %}
 
 {% block body %}
+    {% if app.flashes('success') is not empty %}
+        <div class="alert alert-success">
+            {% for message in app.flashes('success') %}
+                {{ message }}
+            {% endfor %}
+        </div>
    <div class="example-wrapper">
     <h1>{{ book.title }}</h1>
     <img src="{{ book.image }}" alt="{{ book.title }}" class="book-image" />
