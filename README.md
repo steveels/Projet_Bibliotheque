@@ -35,6 +35,14 @@ Php bin/console …
 Avec la CLI 
 Symfony console …
 
+Mettre à jour la bdd :
+Symfony console make:migration 
+Symfony console doctrine:migration:migrate
+
+
+Lancer les fixtures :
+php bin/console doctrine:fixtures:load
+
 
 
 
