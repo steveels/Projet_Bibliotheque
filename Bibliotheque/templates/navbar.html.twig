@@ -18,6 +18,11 @@
         <li class="nav-item">
           <a href={{path("app_profil")}} class="nav-link" >{{'My profile' | trans}}</a>
         </li>
+        {% if app.user.roles is defined and 'ROLE_ADMIN' in app.user.roles %}
+         <li class="nav-item">
+          <a href={{path("admin")}} class="nav-link" >{{'Dashboard' | trans}}</a>
+        </li>
+        {% endif %}
         {% if app.user == null %}
         <li class="nav-item">
           <a href={{path("app_register")}} class="nav-link" >{{'Registration' | trans}}</a>
