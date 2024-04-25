@@ -6,3 +6,7 @@ services:
     App\Security\UsersAuthenticator:
         arguments:
             $userRepository: '@App\Repository\UsersRepository'
+    # config/services.yaml
+    Stripe\StripeClient:
+        arguments:
+            - '%env(STRIPE_SECRET_KEY)%'

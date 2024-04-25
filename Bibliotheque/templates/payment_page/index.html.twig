@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PaymentPageController!{% endblock %}
+
+{% block body %}
+<script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+<stripe-buy-button
+  buy-button-id="buy_btn_1P9SucEU5sEBpGsdo49G93FJ"
+  publishable-key="pk_test_51P95VTEU5sEBpGsds9EQJ2yCNkwuQiQtqGzSVcKurZQYU1IozmnY06BGpFchtmKZdT9EoxqFFCWKfh1sp5cFrXC000a34w5oO3"
+>
+</stripe-buy-button>
+{% endblock %}
