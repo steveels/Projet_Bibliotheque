@@ -18,9 +18,11 @@
         <li class="nav-item">
           <a href={{path("app_profil")}} class="nav-link" >{{'My profile' | trans}}</a>
         </li>
+        {% if app.user == null %}
         <li class="nav-item">
           <a href={{path("app_register")}} class="nav-link" >{{'Registration' | trans}}</a>
         </li>
+        {% endif %}
       </ul>
       <div class="position-absolute top-0 end-0 p-3">
         <div class="d-flex">
@@ -30,6 +32,7 @@
             <a class="nav-link" href={{path("app_logout")}}>{{'Log-out' | trans}}</a>
           </li>
         </ul>
+        
         {% else %}
 
         <ul class="navbar-nav">
