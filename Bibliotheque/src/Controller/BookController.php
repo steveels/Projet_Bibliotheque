@@ -66,7 +66,22 @@ class BookController extends AbstractController
             
         ]);
     }
-   
+    public function list(): Response
+    {
+        // Supposons que tu as une liste de livres, $livres
+        $livreId = 123; // ID d'un livre spécifique, à titre d'exemple
+
+        // Générer l'URL pour afficher les détails du livre avec l'ID spécifique
+        $url = $this->generateUrl('detail_livre', ['id' => $livreId]);
+
+        // Utilise cette URL comme tu en as besoin dans ton contrôleur
+        // Par exemple, tu pourrais la passer à une vue Twig pour créer un lien vers les détails du livre
+
+        // Envoie une réponse (ici, c'est juste un exemple)
+        return $this->render('book/list.html.twig', [
+            'url' => $url,
+        ]);
+    }
 }
     
 

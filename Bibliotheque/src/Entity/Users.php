@@ -375,6 +375,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
+ 
+
+
     /**
      * @return Collection<int, Abonnement>
      */
@@ -404,5 +407,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
 }

@@ -1,3 +1,10 @@
 body {
     background-color: skyblue;
 }
+.book-image {
+    width: 150px; /* Largeur souhaitée */
+    height: auto; /* Hauteur automatique pour maintenir les proportions */
+}
+.livre-en-retard {
+    background-color: #ff9999; /* Rouge clair */
+}

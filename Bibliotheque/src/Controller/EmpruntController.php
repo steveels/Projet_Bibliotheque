@@ -100,5 +100,5 @@ public function detail(Book $book, EmpruntLivreRepository $empruntLivreRepositor
         'emprunt_livre' => $empruntLivre,
     ]);
 }
-
+      
 }
