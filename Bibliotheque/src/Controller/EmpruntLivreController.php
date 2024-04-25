@@ -19,16 +19,12 @@ class EmpruntLivreController extends AbstractController
     #[Route('/', name: 'app_emprunt_livre_index', methods: ['GET'])]
 public function index(EmpruntLivreRepository $empruntLivreRepository): Response
 {
-    // Récupérer tous les emprunts
     $emprunts = $empruntLivreRepository->findAll();
 
-    // Créer un tableau pour stocker les livres associés à chaque emprunt
     $books = [];
 
-    // Pour chaque emprunt, récupérer le livre associé
     foreach ($emprunts as $emprunt) {
         $book = $emprunt->getBook();
-        // Si le livre est trouvé, l'ajouter au tableau avec l'emprunt correspondant
         if ($book) {
             $books[] = [
                 'emprunt' => $emprunt,
@@ -49,27 +45,21 @@ public function index(EmpruntLivreRepository $empruntLivreRepository): Response
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            // Vérifier si le livre existe
             $livre = $empruntLivre->getBook();
             if (!$livre) {
-                // Livre non trouvé, afficher un message d'erreur
                 $this->addFlash('error', 'Le livre sélectionné n\'existe pas.');
                 return $this->redirectToRoute('app_emprunt_livre_new');
             }
     
-            // Vérifier la disponibilité du livre
             if ($livre->isDisponibility()) {
-                // Mettre à jour la disponibilité du livre et enregistrer l'emprunt
                 $livre->setDisponibility(false);
-                $empruntLivre->setDateEmprunt(new \DateTime()); // Enregistrer la date d'emprunt actuelle
+                $empruntLivre->setDateEmprunt(new \DateTime()); 
                 $entityManager->persist($empruntLivre);
                 $entityManager->flush();
     
-                // Rediriger vers la liste des emprunts avec un message de succès
                 $this->addFlash('success', 'Emprunt créé avec succès !');
                 return $this->redirectToRoute('app_emprunt_livre_index');
             } else {
-                // Afficher un message d'erreur si le livre n'est pas disponible
                 $this->addFlash('error', 'Ce livre n\'est pas disponible pour l\'emprunt.');
             }
         }
@@ -83,12 +73,11 @@ public function index(EmpruntLivreRepository $empruntLivreRepository): Response
     #[Route('/{id}', name: 'app_emprunt_livre_show', methods: ['GET'])]
     public function show(Book $book, EmpruntLivreRepository $empruntLivreRepository): Response
     {
-        // Récupérer l'emprunt du livre (s'il existe)
         $empruntLivre = $empruntLivreRepository->findOneBy(['book' => $book]);
     
         return $this->render('livre/detail.html.twig', [
             'book' => $book,
-            'emprunt_livre' => $empruntLivre, // Passer l'emprunt du livre à la vue
+            'emprunt_livre' => $empruntLivre, 
         ]);
     }
 
@@ -124,7 +113,6 @@ public function index(EmpruntLivreRepository $empruntLivreRepository): Response
     #[Route('/livre/{id}', name: 'app_livre_detail', methods: ['GET'])]
     public function detail(Book $book, EmpruntLivreRepository $empruntLivreRepository): Response
     {
-        // Récupérer les détails de l'emprunt du livre
         $empruntLivre = $empruntLivreRepository->findOneBy(['book' => $book]);
     
         return $this->render('livre/detail.html.twig', [
@@ -134,13 +122,10 @@ public function index(EmpruntLivreRepository $empruntLivreRepository): Response
     }
     public function details(Request $request): Response
 {
-    // Récupérer l'utilisateur connecté
     $user = $this->getUser();
 
-    // Récupérer les emprunts de l'utilisateur
-    $loans = $user->IsEmprunts();
+    $loans = $user->getEmpruntLivres();
 
-    // Gérer la demande d'extension de livre
     if ($request->isMethod('POST')) {
         $loanId = $request->request->get('loan_id'); // ID de l'emprunt
         // Ici, tu peux traiter la demande d'extension, par exemple :

@@ -50,7 +50,7 @@ class UsersController extends AbstractController
                 'Les informations de votre compte ont bien été modifiées'
             );
     
-            return $this->redirectToRoute('app_book');
+            return $this->redirectToRoute('app_home');
         }
     
         return $this->render('users/edit.html.twig', [
