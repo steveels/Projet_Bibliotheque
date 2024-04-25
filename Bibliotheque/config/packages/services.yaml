@@ -1,0 +1,8 @@
+# config/services.yaml
+services:
+    App\Repository\UsersRepository:
+        autowire: true
+        # autres configurations éventuelles...
+    App\Security\UsersAuthenticator:
+        arguments:
+            $userRepository: '@App\Repository\UsersRepository'
