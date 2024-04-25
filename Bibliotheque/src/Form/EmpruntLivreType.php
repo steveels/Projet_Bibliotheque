@@ -16,13 +16,13 @@ class EmpruntLivreType extends AbstractType
     {
         $builder
             ->add('dateEmprunt', null, [
-                'widget' => 'single_text',
+                
             ])
             ->add('dateRestitution', null, [
-                'widget' => 'single_text',
+                
             ])
-            ->add('dateRestituionEffective', null, [
-                'widget' => 'single_text',
+            ->add('dateRestitutionEffective', null, [
+                
             ])
             ->add('book', EntityType::class, [
                 'class' => Book::class,

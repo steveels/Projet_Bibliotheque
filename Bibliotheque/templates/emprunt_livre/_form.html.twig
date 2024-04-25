@@ -1,4 +1,9 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.dateEmprunt,{'value': 'now'|date('Y-m-d') })  }}
+    {{ form_row(form.dateRestitution, {'value': 'now'|date_modify('+6 days')|date('Y-m-d') }) }}
+    {{ form_row(form.dateRestitutionEffective) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+
+<button type="button" id="extensionButton">Demander une extension de 6 jours</button>
+<script src="{{ asset('emprunt.js') }}"></script>

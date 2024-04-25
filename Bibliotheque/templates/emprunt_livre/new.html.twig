@@ -9,3 +9,37 @@
 
     <a href="{{ path('app_emprunt_livre_index') }}">back to list</a>
 {% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupérer les éléments des champs de date
+            const dateEmpruntInput = document.getElementById('emprunt_livre_dateEmprunt');
+            const dateRestitutionInput = document.getElementById('emprunt_livre_dateRestitution');
+            const dateRestitutionEffectiveInput = document.getElementById('emprunt_livre_dateRestitutionEffective');
+
+            // Définir la date du jour comme valeur par défaut pour la date d'emprunt
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().slice(0, 16);
+            dateEmpruntInput.value = formattedDate;
+
+            // Calculer la date de restitution (6 jours après la date d'emprunt)
+            const sixDaysLater = new Date(currentDate);
+            sixDaysLater.setDate(currentDate.getDate() + 6);
+            const formattedSixDaysLater = sixDaysLater.toISOString().slice(0, 16);
+            dateRestitutionInput.value = formattedSixDaysLater;
+
+            // Ajouter un écouteur d'événements sur le bouton pour demander une extension de 6 jours
+            const extensionButton = document.getElementById('extensionButton');
+            extensionButton.addEventListener('click', function() {
+                // Calculer la nouvelle date de restitution (6 jours après la date de restitution actuelle)
+                const currentRestitutionDate = new Date(dateRestitutionInput.value);
+                const newRestitutionDate = new Date(currentRestitutionDate);
+                newRestitutionDate.setDate(currentRestitutionDate.getDate() + 6);
+                const formattedNewRestitutionDate = newRestitutionDate.toISOString().slice(0, 16);
+                dateRestitutionInput.value = formattedNewRestitutionDate;
+            });
+        });
+    </script>
+{% endblock %}

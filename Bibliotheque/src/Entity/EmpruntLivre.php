@@ -22,7 +22,7 @@ class EmpruntLivre
     private ?\DateTimeInterface $dateRestitution = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateRestituionEffective = null;
+    private ?\DateTimeInterface $dateRestitutionEffective = null;
 
     #[ORM\ManyToOne(inversedBy: 'empruntLivres')]
     #[ORM\JoinColumn(nullable: false)]
@@ -70,14 +70,14 @@ private ?\DateTimeInterface $dateRetour = null;
         return $this;
     }
 
-    public function getDateRestituionEffective(): ?\DateTimeInterface
+    public function getDateRestitutionEffective(): ?\DateTimeInterface
     {
-        return $this->dateRestituionEffective;
+        return $this->dateRestitutionEffective;
     }
 
-    public function setDateRestituionEffective(\DateTimeInterface $dateRestituionEffective): static
+    public function setDateRestitutionEffective(\DateTimeInterface $dateRestitutionEffective): static
     {
-        $this->dateRestituionEffective = $dateRestituionEffective;
+        $this->dateRestitutionEffective = $dateRestitutionEffective;
 
         return $this;
     }
