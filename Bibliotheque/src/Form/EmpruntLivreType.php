@@ -3,24 +3,27 @@
 namespace App\Form;
 
 use App\Entity\Book;
-use App\Entity\EmpruntLivre;
 use App\Entity\Users;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\EmpruntLivre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class EmpruntLivreType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+    
+       
         $builder
-            ->add('dateEmprunt', null, [
-                
-            ])
-            ->add('dateRestitution', null, [
-                
-            ])
+        ->add('dateEmprunt', DateType::class, [
+            'data' => new \DateTime(), // Définit la date du jour comme valeur par défaut
+        ])
+        ->add('dateRestitution', DateType::class, [
+            'data' => new \DateTime( '+6 day'), // Définit la date dans 6 jours comme valeur par défaut
+        ])
             ->add('dateRestitutionEffective', null, [
                 
             ])

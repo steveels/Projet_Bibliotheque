@@ -367,5 +367,5 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         // Retourne une représentation sous forme de chaîne de caractères de l'utilisateur,
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
-
+ 
 }

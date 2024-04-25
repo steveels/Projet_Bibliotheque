@@ -18,3 +18,13 @@ app_emprunts_index:
     controller: 'App\Controller\EmpruntLivreController::index'
     methods: ['GET']
        
+
+my_loans:
+    path: /mes-emprunts
+    controller: App\Controller\UsersController::myLoans
+    methods: [GET]
+
+extend_loan:
+    path: /prolonger-emprunt/{id}
+    controller: App\Controller\UsersController::extendLoan
+    methods: [GET]       

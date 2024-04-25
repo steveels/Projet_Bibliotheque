@@ -25,17 +25,19 @@
         <p>Aucun état défini pour ce livre.</p>
     {% endif %}
 
-    {% if is_granted('ROLE_USER') %}
+       {% if is_granted('ROLE_USER') %}
         {% if book.disponibility %}
             <a href="{{ path('app_emprunt_livre_new', { 'id': book.id }) }}" class="btn btn-primary">Emprunter</a>
         {% else %}
             <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
         {% endif %}
-        {# Ajoutez ici le bouton ou le lien pour demander une extension de prêt #}
-        {% if emprunt_livre is defined %}
         
-            <a href="{{ path('app_emprunt_livre', { 'id': emprunt_livre.id }) }}" class="btn btn-primary">Demander une extension</a>
-        {% endif %}
+        {# Ajoutez ici le bouton ou le lien pour demander une extension de prêt
+        {% if emprunt_livre is not null %}
+            {% if emprunt_livre %} #}
+                {# <a href="{{ path('app_emprunt_details', { 'id': emprunt_livre }) }}" class="btn btn-primary">Demander une extension</a> #}
+            {# {% endif %} #}
+        {# {% endif %} #}
     {% endif %}
 </div>
 {% endblock %}

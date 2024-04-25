@@ -10,6 +10,7 @@ use App\Repository\EmpruntLivreRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/emprunt/livre')]
@@ -131,6 +132,25 @@ public function index(EmpruntLivreRepository $empruntLivreRepository): Response
             'emprunt_livre' => $empruntLivre,
         ]);
     }
-  
+    public function details(Request $request): Response
+{
+    // Récupérer l'utilisateur connecté
+    $user = $this->getUser();
 
+    // Récupérer les emprunts de l'utilisateur
+    $loans = $user->IsEmprunts();
+
+    // Gérer la demande d'extension de livre
+    if ($request->isMethod('POST')) {
+        $loanId = $request->request->get('loan_id'); // ID de l'emprunt
+        // Ici, tu peux traiter la demande d'extension, par exemple :
+        // - Vérifier si l'utilisateur a le droit d'étendre cet emprunt
+        // - Effectuer la logique d'extension de l'emprunt
+        // - Rediriger l'utilisateur vers une page de confirmation ou de gestion des emprunts
+    }
+
+    return $this->render('emprunt_livre/index.html.twig', [
+        'loans' => $loans,
+    ]);
+}
 }

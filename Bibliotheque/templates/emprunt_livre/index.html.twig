@@ -1,41 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}EmpruntLivre index{% endblock %}
+{% block title %}Mes Emprunts{% endblock %}
 
 {% block body %}
-       <h1>Liste des emprunts de livres</h1>
-
-    <table class="table">
+    <h1>Mes Emprunts</h1>
+    <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Livre</th>
                 <th>Date d'emprunt</th>
-                <th>Date de restitution</th>
+                <th>Date de retour</th>
                 <th>Date de restitution effective</th>
-                <th>Actions</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            {% for book in emprunt_livres %}
+            {% for loan in loans %}
                 <tr>
-                    <td>{{ book.emprunt.id }}</td>
-                    <td>{{ book.book.title }}</td>
-                    <td>{{ book.emprunt.dateEmprunt ? book.emprunt.dateEmprunt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ book.emprunt.dateRestitution ? book.emprunt.dateRestitution|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ book.emprunt.dateRestituionEffective ? book.emprunt.dateRestituionEffective|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ loan.getBook().getTitle() }}</td>
+                    <td>{{ loan.getDateEmprunt() | date('Y-m-d') }}</td>
+                    <td>{% if loan.isOverdue() %}<span style="color:red">{{ loan.getDateRetour() | date('Y-m-d') }}</span>{% else %}{{ loan.getDateRetour() | date('Y-m-d') }}{% endif %}</td>
+                    <td>{{ loan.getDateRestitutionEffective() | date('Y-m-d') }}</td>
                     <td>
-                        <a href="{{ path('app_emprunt_livre_show', {'id': book.emprunt.id}) }}">Voir</a>
-                        <!-- Ajoutez ici les liens pour éditer et supprimer chaque emprunt -->
+                        {% if loan.isOverdue() %}
+                            <a href="{{ path('extend_loan', {'id': loan.getId()}) }}" class="btn btn-primary">Demander une extension</a>
+                        {% endif %}
                     </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6">Aucun emprunt trouvé</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_emprunt_livre_new') }}">Ajouter un emprunt</a>
 {% endblock %}

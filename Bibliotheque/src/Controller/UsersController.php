@@ -103,4 +103,35 @@ class UsersController extends AbstractController
         ]);
     }
     
-}
+    
+        #[Route('/utilisateur/prolonger-emprunt/{id}', name: 'user.extend_loan', methods: ['GET'])]
+        public function extendLoan(Request $request, EntityManagerInterface $entityManager, $id): Response
+        {
+            // Récupérer l'utilisateur connecté
+            $user = $this->getUser(); 
+        
+            if (!$user) {
+                return $this->redirectToRoute('app_login');
+            }
+        
+            // Récupérer l'emprunt à partir de son ID
+            $emprunt = $entityManager->getRepository(EmpruntLivre::class)->find($id); // Remplacer Loan par EmpruntLivre
+        
+            // Vérifier si l'emprunt appartient à l'utilisateur connecté
+            if ($emprunt->getUser() !== $user) { // Remplacer Loan par EmpruntLivre
+                throw new AccessDeniedException('Vous n\'avez pas le droit de prolonger cet emprunt.');
+            }
+        
+            // Ici, tu peux implémenter la logique pour prolonger l'emprunt
+            // Par exemple, mettre à jour la date de retour prévue de l'emprunt dans la base de données
+        
+            // Ensuite, tu peux rediriger l'utilisateur vers une page de confirmation ou de gestion des emprunts
+            $this->addFlash(
+                'success',
+                'Emprunt prolongé avec succès.'
+            );
+        
+            return $this->redirectToRoute('app_book');
+        }
+    }
+
