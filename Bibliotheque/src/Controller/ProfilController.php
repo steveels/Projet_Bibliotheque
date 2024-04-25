@@ -15,7 +15,7 @@ class ProfilController extends AbstractController
     public function index(Users $user): Response
     {
 
-        $user = $this->getUser($id);
+        $user = $this->getUser();
 
         // $user = $this->getUser();
 

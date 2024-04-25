@@ -13,7 +13,7 @@
     <p>État du livre : {{ livres.etat.typeEtat  }}</p>
     <p>Catégorie : {{ livres.categorie.name }}</p>
     {% if livres.disponibility %}
-        <a href="{{ path('app_emprunt', {'id': livres.id}) }}" class="btn btn-primary">Emprunter</a>
+        <a href="{{ path('app_emprunt_livre_index', {'id': livres.id}) }}" class="btn btn-primary">Emprunter</a>
     {% else %}
         <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
     {% endif %}
