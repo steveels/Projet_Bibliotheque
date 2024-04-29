@@ -29,7 +29,7 @@ class EmpruntFixture extends Fixture
 
            $emprunt->setDateEmprunt($this->faker->dateTimeThisMonth())
            ->setDateRestitution($this->faker->dateTimeThisMonth())
-           ->setDateRestituionEffective($this->faker->dateTimeThisMonth());
+           ->setDateRestitutionEffective($this->faker->dateTimeThisMonth());
 
            $utilisateur = $this->faker->randomElement($utilisateurs);
            $emprunt->setUser($utilisateur);

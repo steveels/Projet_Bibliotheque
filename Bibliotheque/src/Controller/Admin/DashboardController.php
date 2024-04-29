@@ -18,8 +18,6 @@ class DashboardController extends AbstractDashboardController
     #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
-        // return parent::index();
-
         return $this->render('admin/dashboard.html.twig');
     }
 

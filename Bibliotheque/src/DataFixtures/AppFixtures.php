@@ -36,14 +36,11 @@ class AppFixtures extends Fixture
             ->setZipCode('3456789')
             ->setPhoneNumber('234567890');
 
-        // Hachage du mot de passe
         $hashedPassword = $this->passwordHasher->hashPassword($admin, 'password');
         $admin->setPassword($hashedPassword);
 
-        // Persister l'admin
         $manager->persist($admin);
 
-        // Création d'autres utilisateurs
         for ($i = 0; $i < 10; $i++) {
             $user = new Users();
             $user->setFirstname($this->faker->name())
@@ -55,14 +52,11 @@ class AppFixtures extends Fixture
                 ->setZipCode($this->faker->randomNumber())
                 ->setPhoneNumber($this->faker->randomNumber());
 
-            // Hachage du mot de passe
             $hashedPassword = $this->passwordHasher->hashPassword($user, 'password');
             $user->setPassword($hashedPassword);
 
-            // Persister l'utilisateur
             $manager->persist($user);
         }
-        // Enregistrer les modifications dans la base de données
         $manager->flush();
     }
 }

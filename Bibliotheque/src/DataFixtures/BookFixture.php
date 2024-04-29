@@ -24,7 +24,6 @@ class BookFixture extends Fixture
             'https://boutique.annabac.com/system/product_pictures/data/009/953/889/large/9782401078499-001-X.jpg?1687516306',
             
         ];
-        // Génération de 5 livres
         for ($i = 0; $i < 20; $i++) {
             $livre = new Book();
             $livre->setTitle($this->faker->sentence(1));
@@ -34,7 +33,7 @@ class BookFixture extends Fixture
             $livre->setDisponibility($this->faker->boolean());
             
             $livre->setImage($this->faker->randomElement($image));
-            // Génération aléatoire d'un état
+
             $etat = new Etat();
             $etat->setTypeEtat($this->faker->randomElement(['excellent',
             'correct','moyen','mauvais']));
@@ -42,7 +41,6 @@ class BookFixture extends Fixture
 
             $livre->setEtat($etat);
 
-            // Génération aléatoire d'une catégorie
             $categorie = new Categories();
             $categorie->setName($this->faker->randomElement(['Fiction', 'Non-fiction', 'Science-fiction']));
             $manager->persist($categorie);
