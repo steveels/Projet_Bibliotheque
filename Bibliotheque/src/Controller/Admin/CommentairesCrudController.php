@@ -29,7 +29,7 @@ class CommentairesCrudController extends AbstractCrudController
                 return 'Livre non défini';
             }),
         TextField::new('content'),
-        DateTimeField::new('dateAjout')->onlyOnIndex(),
+        DateTimeField::new('dateAjout'),
         AssociationField::new('comUser')
             ->formatValue(function ($value, $entity) {
                 if ($value !== null) {

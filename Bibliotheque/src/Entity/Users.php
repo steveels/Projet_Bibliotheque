@@ -74,7 +74,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Commentaires>
      */
-    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'comUser')]
+    #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'comUser', orphanRemoval: true)]
     private Collection $commentaires;
 
     #[ORM\Column(nullable: true)]
@@ -348,7 +348,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCommentaire(Commentaires $commentaire): static
     {
         if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
             if ($commentaire->getComUser() === $this) {
                 $commentaire->setComUser(null);
             }

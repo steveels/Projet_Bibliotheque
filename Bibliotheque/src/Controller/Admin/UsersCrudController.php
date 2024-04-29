@@ -35,8 +35,8 @@ class UsersCrudController extends AbstractCrudController
         return [ 
             IdField::new('id')
                 ->hideOnForm(),
-            TextField::new('email')
-                ->setFormTypeOption('disabled', 'disabled'),
+            TextField::new('email'),
+                // ->setFormTypeOption('disabled', 'disabled'),
             TextField::new('lastname'),
             TextField::new('firstname'),
             DateTimeField::new('birthdate'),
@@ -45,7 +45,8 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('city'),
             TextField::new('zip_code'),
             IntegerField::new('phoneNumber'),
-            BooleanField::new('banni')
+            BooleanField::new('banni'),
+            TextField::new('password'),
             
         ];
     }
