@@ -5,12 +5,10 @@
 {% block body %}
 {% set firstNameDisplayed = false %}
 
-    {% for reservation in reservations %}
         {% if not firstNameDisplayed %}
-            <h1>{{'Hello' | trans}} {{ reservation.user.firstname }} {{'books you have read' | trans}}</h1>
+            <h1>{{'Hello' | trans}} {{ prenomUser}} {{'room you have loan' | trans}}</h1>
         {% set firstNameDisplayed = true %} 
         {% endif %}   
-    {% endfor %}
 
 
         <table class="table table-striped">
@@ -24,17 +22,18 @@
             </tr>
         </thead>
         <tbody>
-            {% for reservation in reservations %}
+            {% for reservation in reservationsDetails %}
                 <tr>
-                <th scope="row">{{ reservation.room.name }}</th>
-                <td>{{ reservation.room.capability }}</td>
+                <th scope="row">{{ reservation.nom_salle }}</th>
+                <td>{{ reservation.capacite }}</td>
                 <td>
-                    {% for equipement in reservation.room.equipement %}
-                        {{ equipement.nom }}{% if not loop.last %}, {% endif %}
-                    {% endfor %}
+                {% for equipement in reservation.equipements %}
+                    {{ equipement.getNom() }}
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}
                 </td>
-                <td>{{ reservation.dateDebut |date('Y-m-d H:i:s') }}</td>
-                <td>{{ reservation.dateFin |date('Y-m-d H:i:s') }}</td>
+                <td>{{ reservation.date_debut |date('Y-m-d H:i:s') }}</td>
+                <td>{{ reservation.date_fin |date('Y-m-d H:i:s') }}</td>
                 </tr>
             {% endfor %}
         </tbody>

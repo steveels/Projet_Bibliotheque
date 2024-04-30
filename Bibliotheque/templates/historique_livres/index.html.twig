@@ -6,12 +6,11 @@
 
     {% set firstNameDisplayed = false %}
 
-    {% for emprunt in emprunts %}
+    
         {% if not firstNameDisplayed %}
-            <h1>Bonjour {{ emprunt.user.firstname }} des livres que vous avez lu</h1>
+            <h1>Bonjour {{ prenomUser }} Ceci est l'historique des livres que vous avez déjà emprunté</h1>
         {% set firstNameDisplayed = true %} 
         {% endif %}   
-    {% endfor %}
 
 
         <table class="table table-striped">
@@ -19,19 +18,19 @@
             <tr>
             <th scope="col">{{'Title' | trans}}</th>
             <th scope="col">{{'Author' | trans}}</th>
-            <th scope="col"> {{'Loan date' | trans}}</th>
+            <th scope="col"> {{'Resume' | trans}}</th>
+            <th scope="col">{{'Etat du livre' | trans}}</th>
             <th scope="col">{{'Return date' | trans}}</th>
-            <th scope="col">{{'Effective return date' | trans}}</th>
             </tr>
         </thead>
         <tbody>
-            {% for emprunt in emprunts %}
+            {% for emprunt in empruntsDetails %}
                 <tr>
-                <th scope="row">{{ emprunt.book.title }}</th>
-                <td>{{ emprunt.book.author }}</td>
-                <td>{{ emprunt.dateEmprunt|date('Y-m-d H:i:s') }}</td>
-                <td>{{ emprunt.dateRestitution|date('Y-m-d H:i:s') }}</td>
-                <td>{{ emprunt.dateRestitutionEffective|date('Y-m-d H:i:s') }}</td>
+                <th scope="row">{{ emprunt.titre_livre }}</th>
+                <td>{{ emprunt.auteur_livre }}</td>
+                <td>{{ emprunt.resume_livre  }}</td>
+                <td>{{ emprunt.etat_livre }}</td>
+                <td>{{ emprunt.date_emprunt|date('Y-m-d H:i:s') }}</td>
                 </tr>
             {% endfor %}
         </tbody>
