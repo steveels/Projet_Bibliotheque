@@ -1,6 +1,6 @@
 {
     "require": {
-        "stripe/stripe-php": "^14.3",
+        "stripe/stripe-php": "^14.5",
         "fakerphp/faker": "^1.23"
     }
 }

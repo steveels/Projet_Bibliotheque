@@ -1,12 +1,17 @@
 # config/services.yaml
+parameters:
+    stripe_sk: '%env(resolve:STRIPE_SK)%'
+    stripe_pk: '%env(resolve:STRIPE_PK)%'
+    stripe_webhook_secret: '%env(resolve:STRIPE_WEBHOOK_SECRET)%'
+
+
 services:
     App\Repository\UsersRepository:
         autowire: true
         # autres configurations éventuelles...
+
     App\Security\UsersAuthenticator:
         arguments:
             $userRepository: '@App\Repository\UsersRepository'
-    # config/services.yaml
-    Stripe\StripeClient:
-        arguments:
-            - '%env(STRIPE_SECRET_KEY)%'
+
+
