@@ -12,33 +12,28 @@
     <p>{{ livres.resume }}</p>
     <p>État du livre : {{ livres.etat.typeEtat  }}</p>
     <p>Catégorie : {{ livres.categorie.name }}</p>
-    {% if livres.disponibility %}
-        <a href="{{ path('app_emprunt_livre_index', {'id': livres.id}) }}" class="btn btn-primary">Emprunter</a>
+    {% if is_granted('ROLE_USER') and hasActiveSubscription %}
+        {% if livres.disponibility %}
+            <a href="{{ path('app_emprunt_livre_index', {'id': livres.id}) }}" class="btn btn-primary">Emprunter</a>
+        {% else %}
+            <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
+        {% endif %}
+    {% elseif is_granted('ROLE_USER') and not hasActiveSubscription %}
+        <p class='alert-danger'>Vous avez besoin d'un abonnement actif pour emprunter un livre.</p>
+        <a href="{{ path('app_account') }}" class="btn btn-primary">S'abonner</a>
     {% else %}
-        <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
+        <p class='alert-danger'>Veuillez vous inscrire ou vous connecter.</p>
+        <a href="{{ path('app_login') }}" class="btn btn-primary">Cliquez ici</a>
     {% endif %}
     {% endfor %}
-
 
     {% if app.flashes('success') is not empty %}
         <div class="alert alert-success">
             {% for message in app.flashes('success') %}
                 {{ message }}
             {% endfor %}
-           
         </div>
-   <div class="example-wrapper">
-    <h1>{{ livres.title }}</h1>
-    <img src="{{ livres.image }}" alt="{{ livres.title }}" class="book-image" />
-    <p>{{ livres.resume }}</p>
-    <p>État du livre : {{ livres.etat }}</p>
-    <p>Catégorie : {{ livres.categorie }}</p> 
-    {% if livres.disponibility %}
-        <a href="{{ path('app_emprunt', {'id': livres.id}) }}" class="btn btn-primary">Emprunter</a>
-    {% else %}
-        <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
     {% endif %}
-{% endif %}
 
     <h1>{{'List of books' | trans}}</h1>
     <ul>
@@ -46,10 +41,8 @@
             <li>{{ livres.title }}</li>
             <img src="{{ livres.image }}" alt="{{ livres.title }}" class="book-image" />
             <li>{{ livres.author }}</li>
-         <a href="{{ path("details",{id:livres.id}) }}">{{'See more' | trans}}</a>
-
+            <a href="{{ path('details', {id: livres.id}) }}">{{'See more' | trans}}</a>
         {% endfor %}
-
     </ul>
 
 </div>

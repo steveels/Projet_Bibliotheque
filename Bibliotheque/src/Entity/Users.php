@@ -89,6 +89,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripeId = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Subscription $subscription = null;
+
   
 
     #[ORM\EntityListeners(['App\EntityListener\UsersListener'])]
@@ -417,6 +420,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStripeId(?string $stripeId): static
     {
         $this->stripeId = $stripeId;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): static
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }
