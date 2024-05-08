@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BookController extends AbstractController
@@ -32,10 +33,17 @@ class BookController extends AbstractController
     {
         // Récupère la liste des livres depuis la base de données
         $livres = $this->bookRepository->findAll();
-        
+        $user = $this->getUser();
+        $hasActiveSubscription = false;
+
+        if ($user instanceof UserInterface) {
+            $subscription = $user->getSubscription();
+            $hasActiveSubscription = $subscription && $subscription->isActive();
+        }
         // Rend la vue Twig en passant les données des livres
         return $this->render('livre/index.html.twig', [
             'livres' => $livres,
+            'hasActiveSubscription' => $hasActiveSubscription,
         ]);
     }
 
@@ -58,12 +66,10 @@ class BookController extends AbstractController
     public function detail(int $id, BookRepository $bookRepository): Response
     {
         $book = $bookRepository->find($id);
-
-          
         
+    
         return $this->render('livre/detail.html.twig', [
             'book' => $book,
-            
         ]);
     }
     public function list(): Response

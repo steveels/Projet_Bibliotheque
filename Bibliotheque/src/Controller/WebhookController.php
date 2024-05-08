@@ -86,7 +86,10 @@ public function handleStripeWebhook(Request $request, LoggerInterface $logger, E
             $subscription->setCurrentPeriodEnd(new \DateTime('@'.$subscriptionStripe->current_period_end));
             $subscription->setActive(true);
 
+            $user->setSubscription($subscription);
+
             $entityManager->persist($subscription);
+            $entityManager->persist($user);
             $entityManager->flush();
 
             break;

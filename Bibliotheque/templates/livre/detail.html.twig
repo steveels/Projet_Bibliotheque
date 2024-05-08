@@ -3,41 +3,22 @@
 {% block title %}{{ 'Book Details' | trans }}{{ book.title }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
 <div class="example-wrapper">
     <h1>{{ book.title }}</h1>
     <img src="{{ book.image }}" alt="{{ book.title }}" class="book-image" />
     <p>{{ book.resume }}</p>
-    <h2>Catégorie du livre</h2>
-    {% if book.categorie is not null %}
-        <p>{{ book.categorie.name }}</p>
-    {% else %}
-        <p>Aucune catégorie définie pour ce livre.</p>
-    {% endif %}
-    <h2>État du livre</h2>
-    {% if book.etat is not null %}
-        <p>{{ book.etat.typeEtat }}</p>
-    {% else %}
-        <p>Aucun état défini pour ce livre.</p>
-    {% endif %}
 
-       {% if is_granted('ROLE_USER') %}
+    {% if is_granted('ROLE_USER') and hasActiveSubscription %}
         {% if book.disponibility %}
             <a href="{{ path('app_emprunt_livre_new', { 'id': book.id }) }}" class="btn btn-primary">Emprunter</a>
         {% else %}
             <p>Ce livre n'est pas disponible pour l'emprunt actuellement.</p>
         {% endif %}
-        
-        {# Ajoutez ici le bouton ou le lien pour demander une extension de prêt
-        {% if emprunt_livre is not null %}
-            {% if emprunt_livre %} #}
-                {# <a href="{{ path('app_emprunt_details', { 'id': emprunt_livre }) }}" class="btn btn-primary">Demander une extension</a> #}
-            {# {% endif %} #}
-        {# {% endif %} #}
+    {% elseif is_granted('ROLE_USER') and not hasActiveSubscription %}
+        <p class='alert-danger'>Vous avez besoin d'un abonnement actif pour emprunter un livre.</p>
+    {% else %}
+        <p class='alert-danger'>Veuillez vous inscrire ou vous connecter.</p>
+        <a href="{{ path('app_login') }}" class="btn btn-primary">Cliquez ici</a>
     {% endif %}
 </div>
 {% endblock %}
