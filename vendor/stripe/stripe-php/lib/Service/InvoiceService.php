@@ -88,6 +88,11 @@ class InvoiceService extends \Stripe\Service\AbstractService
      * <code>period[start]</code> is equal to the
      * <code>subscription_details.proration_date</code> value passed in the request.
      *
+     * Note: Currency conversion calculations use the latest exchange rates. Exchange
+     * rates may vary between the time of the preview and the time of the actual
+     * invoice creation. <a href="https://docs.stripe.com/currencies/conversions">Learn
+     * more</a>
+     *
      * @param null|array $params
      * @param null|RequestOptionsArray|\Stripe\Util\RequestOptions $opts
      *
@@ -249,11 +254,16 @@ class InvoiceService extends \Stripe\Service\AbstractService
      * You can preview the effects of updating a subscription, including a preview of
      * what proration will take place. To ensure that the actual proration is
      * calculated exactly the same as the previewed proration, you should pass the
-     * <code>subscription_proration_date</code> parameter when doing the actual
+     * <code>subscription_details.proration_date</code> parameter when doing the actual
      * subscription update. The recommended way to get only the prorations being
      * previewed is to consider only proration line items where
      * <code>period[start]</code> is equal to the
-     * <code>subscription_proration_date</code> value passed in the request.
+     * <code>subscription_details.proration_date</code> value passed in the request.
+     *
+     * Note: Currency conversion calculations use the latest exchange rates. Exchange
+     * rates may vary between the time of the preview and the time of the actual
+     * invoice creation. <a href="https://docs.stripe.com/currencies/conversions">Learn
+     * more</a>
      *
      * @param null|array $params
      * @param null|RequestOptionsArray|\Stripe\Util\RequestOptions $opts

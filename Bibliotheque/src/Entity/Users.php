@@ -81,10 +81,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?bool $banni = null;
 
     /**
-     * @var Collection<int, Abonnement>
+     * @var Collection<int, Subscription>
      */
-    #[ORM\OneToMany(targetEntity: Abonnement::class, mappedBy: 'users')]
-    private Collection $abonnements;
+    #[ORM\OneToMany(targetEntity: Subscription::class, mappedBy: 'user')]
+    private Collection $subscriptions;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stripeId = null;
+
+  
 
     #[ORM\EntityListeners(['App\EntityListener\UsersListener'])]
 
@@ -93,7 +98,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->reservations = new ArrayCollection();
         $this->empruntLivres = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
-        $this->abonnements = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -374,38 +379,45 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
- 
-
-
     /**
-     * @return Collection<int, Abonnement>
+     * @return Collection<int, Subscription>
      */
-    public function getAbonnements(): Collection
+    public function getSubscriptions(): Collection
     {
-        return $this->abonnements;
+        return $this->subscriptions;
     }
 
-    public function addAbonnement(Abonnement $abonnement): static
+    public function addSubscription(Subscription $subscription): static
     {
-        if (!$this->abonnements->contains($abonnement)) {
-            $this->abonnements->add($abonnement);
-            $abonnement->setUsers($this);
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions->add($subscription);
+            $subscription->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeAbonnement(Abonnement $abonnement): static
+    public function removeSubscription(Subscription $subscription): static
     {
-        if ($this->abonnements->removeElement($abonnement)) {
+        if ($this->subscriptions->removeElement($subscription)) {
             // set the owning side to null (unless already changed)
-            if ($abonnement->getUsers() === $this) {
-                $abonnement->setUsers(null);
+            if ($subscription->getUser() === $this) {
+                $subscription->setUser(null);
             }
         }
 
         return $this;
     }
 
+    public function getStripeId(): ?string
+    {
+        return $this->stripeId;
+    }
 
+    public function setStripeId(?string $stripeId): static
+    {
+        $this->stripeId = $stripeId;
+
+        return $this;
+    }
 }
