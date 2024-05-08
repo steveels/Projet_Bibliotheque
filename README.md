@@ -44,11 +44,27 @@ Lancer les fixtures :
 php bin/console doctrine:fixtures:load
 
 
+---------------------------------------------------
+Utilisation de Stripe
 
+Dans l'entité plan, ajouter manuellement (pas de fixtures pour ça) dans les champs :
+- stripe_id : price_1P9BmNEU5sEBpGsdwg5Hk1hR
+- payment_link : https://buy.stripe.com/test_aEU5oj82Z50SahW8ww
 
+Lors du réglement de l'abonnement mettre impérativement dans les champs :
+- E-mail : celui renseigné lors de l'inscription
+- numéro carte bancaire : 4242424242424242
+- Les autres champs peuvent-être rempli selon votre bon vouloir
 
+Les controllers relatifs à l'abonnement sont :
+- AccountController.php
+- WebhookController.php
 
-
+Les entités relatifs à l'abonnement sont :
+- Plan.php
+- Subscription.php
+- Invoice.php
+- Users.php
 
 
 
